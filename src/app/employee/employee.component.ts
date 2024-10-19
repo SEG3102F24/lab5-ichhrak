@@ -33,12 +33,21 @@ export class EmployeeComponent {
 
   onSubmit() {
     const employee: Employee = new Employee(this.name.value,
-      new Date(this.dateOfBirth.value),
+      this.dateOfBirth.value,
       this.city.value,
       this.salary.value,
       this.gender.value,
       this.email.value);
-    this.employeeService.addEmployee(employee);
+    // Convert the employee object to a plain JavaScript object
+    const employeeData = {
+      name: employee.name,
+      dateOfBirth: employee.dateOfBirth,
+      city: employee.city,
+      salary: employee.salary,
+      gender: employee.gender,
+      email: employee.email
+    };
+    this.employeeService.addEmployee(employeeData);
     this.employeeForm.reset();
     this.router.navigate(['/employees']).then(() => {});
   }
